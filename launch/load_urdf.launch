@@ -9,7 +9,7 @@
 
   <arg name="init_pos_x" 	default="0.0"/>
   <arg name="init_pos_y" 	default="0.0"/>
-  <arg name="init_pos_z" 	default="0.0"/>
+  <arg name="init_pos_z" 	default="0.25"/>
   <arg name="init_yaw"   	default="0.0"/>
 
   <!-- robot_description -->

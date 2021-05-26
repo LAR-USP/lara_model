@@ -14,7 +14,7 @@
 
   <!-- robot_description -->
   <param name="robot_description"
-    command="$(find xacro)/xacro $(find lara_model)/$(arg model)" />
+    command="$(find xacro)/xacro $(find lara_model)/urdf/$(arg model)" />
 
   <!-- rviz -->
   <group if="$(arg enable_rviz)" >
@@ -29,7 +29,7 @@
   <!-- keyboard teleop -->
   <group if="$(arg enable_teleop)">
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
-      output="screen" launch-prefix="xterm -hold -e"/>
+      output="screen" />
   </group>
 
   <!-- publishers -->

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lara">
+
+    <xacro:include filename="$(find p2os_urdf)/defs/pioneer3dx.xacro"/>
+    <xacro:include filename="$(find lara_model)/urdf/simulation/gazebo_laser.xacro" />
+
+    <link name="chassis">
+        <visual>
+            <geometry>
+                <mesh filename="package://lara_model/objs/lara_body.obj"/>
+            </geometry>            
+            <origin xyz="0 0 0" rpy="0 0 ${-3.14159265/2}"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://lara_model/objs/lara_body.obj"/>
+            </geometry>   
+            <origin xyz="0 0 0" rpy="0 0 ${-3.14159265/2}"/>
+        </collision>
+        <inertial>
+            <mass value="2.5"/>
+            <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+            <origin xyz="0.0 0 0" rpy="0 0 ${-3.14159265/2}"/>
+        </inertial>
+    </link>
+
+    <joint name="base_link_to_chassis" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="0.1 0 0.25" rpy="0 0 0"/>
+    </joint>
+
+  <!-- SENSORS -->
+  <joint name="hokuyo_joint" type="fixed">
+    <origin xyz="0.225 0.0 0.175" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.05 0.05 0.07"/>
+      </geometry>
+    </collision>
+
+    <visual>
+        <geometry>
+          <box size="0.05 0.05 0.07"/>
+        </geometry>            
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <!-- Plugins -->
+  <xacro:gazebo_laser reference="hokuyo_link"/>
+
+</robot>

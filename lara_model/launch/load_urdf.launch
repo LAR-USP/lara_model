@@ -22,9 +22,21 @@
   </group>
 
   <!-- gazebo -->
-  <group if="$(arg enable_gazebo)">
+  <!-- <group if="$(arg enable_gazebo)">
     <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+  </group> -->
+  <group if="$(arg enable_gazebo)">
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find lara_model)/../worlds/cbr2018.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
   </group>
+
+
 
   <!-- keyboard teleop -->
   <group if="$(arg enable_teleop)">
